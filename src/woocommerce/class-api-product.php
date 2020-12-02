@@ -80,8 +80,8 @@ class API_Product {
 	 * @see WC_REST_Products_V2_Controller::prepare_object_for_response()
 	 *
 	 * @param WP_REST_Response $response The response object.
-	 * @param WC_Product $product Object data.
-	 * @param WP_REST_Request $request Request object.
+	 * @param WC_Product       $product Object data.
+	 * @param WP_REST_Request  $request Request object.
 	 *
 	 * @return WP_REST_Response
 	 */
