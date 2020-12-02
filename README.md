@@ -1,6 +1,80 @@
 [![WordPress tested 5.5](https://img.shields.io/badge/WordPress-v5.5%20tested-0073aa.svg)](https://wordpress.org/plugins/plugin_slug) [![PHPCS WPCS](https://img.shields.io/badge/PHPCS-WordPress%20Coding%20Standards-8892BF.svg)](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) [![PHPUnit ](.github/coverage.svg)](https://brianhenryie.github.io/plugin_slug/)
 
-# BH WC REST Change Units
+# REST Change Units
+
+Use different product weight units in the REST API than elsewhere in your WooCommerce store.
+
+Uses [PhpUnitsOfMeasure](https://github.com/PhpUnitsOfMeasure/php-units-of-measure) library for conversions.
+
+## Why?
+
+When importing orders to [DHL](https://dhlexpresscommerce.com/), the only configurable units on DHL's end were `g` / `kg` / `lbs`. Our store uses `oz` internally. 
+
+## Use
+
+Download latest release, upload to your WordPress/WooCommerce store. Configure:
+
+![REST API weight unit](./assets/screenshot-1.png "REST API weight unit settings screenshot")
+
+Only one option is provided by the plugin, on the WooCommerce settings product page.
+
+For more granular control, use the `pre_option_bh_wc_rest_change_units_weight_unit` filter:
+
+```php
+/**
+ * Conditionally configure the units to return in the REST API.
+ * 
+ * @see get_option()
+ * 
+ * @param false|mixed $pre_option Return false to fetch the option value as normal.
+ * @param string      $option     The option name: "bh_wc_rest_change_units_weight_unit".
+ * @param mixed       $default    The default value as might be specified by get_option() second parameter.
+ *
+ * @return false|mixed|string|void
+ */
+$conditionally_change_rest_weight_unit = function ( $pre_option, $option, $default ) {
+
+	// Check consumer key.
+	if( 'ck_0123456789abcdef1234567890abcdef123abcd' === $_SERVER['PHP_AUTH_USER'] ) {
+		return 'g';
+	}
+
+	// Check IP address.
+	if( '127.0.0.1' === WC_Geolocation::get_ip_address() ) {
+		return 'oz';
+	}
+
+	// Check user agent.
+	if( 'PostmanRuntime/7.26.8' === $_SERVER['HTTP_USER_AGENT'] ) {
+		return 'lbs';
+	}
+
+	// Do no conversion. TODO: infinite loop here.
+	return get_option( 'woocommerce_weight_unit' );
+
+
+	// Return whatever is configured in WooCommerce settings (i.e. return what is configured on the settings page as normal).
+	return $pre_option;
+
+};
+add_filter( 'pre_option_bh_wc_rest_change_units_weight_unit', $conditionally_change_rest_weight_unit, 10, 3 );
+```
+
+
+## Notes
+
+### Internal REST API calls.
+
+It's not unheard of for WordPress plugins to use the REST API internally to query data, so this may result in unexpected behavioiur.
+
+### Create/Update
+
+This does not make any conversions when data is being _written_ to the REST API.
+
+### Product Types
+
+This is only tested with Simple products (although 'weight' is a field in the base WC_Product, so I expect it should work without issue).
+
 
 ## Contributing
 
@@ -12,7 +86,7 @@ open -a PhpStorm ./;
 composer install;
 ```
 
-For integration and acceptance tests, a local webserver must be running with `localhost/plugin_slug/` pointing at the root of the repo. MySQL must also be running locally – with two databases set up with:
+For integration and acceptance tests, a local webserver must be running with `localhost:8080/plugin_slug/` pointing at the root of the repo. MySQL must also be running locally – with two databases set up with:
 
 ```
 mysql_username="root"
@@ -73,8 +147,8 @@ To clear Codeception cache after moving/removing test files:
 vendor/bin/codecept clean
 ```
 
+To use XDebug inside Postman, append `&XDEBUG_SESSION_START=PHPSTORM` to the query.
+
 ### More Information
 
-See [github.com/BrianHenryIE/WordPress-Plugin-Boilerplate](https://github.com/BrianHenryIE/WordPress-Plugin-Boilerplate) for initial setup rationale. 
-
-# Acknowledgements
+See [github.com/BrianHenryIE/WordPress-Plugin-Boilerplate](https://github.com/BrianHenryIE/WordPress-Plugin-Boilerplate) for initial project setup rationale. 
