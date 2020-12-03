@@ -1,4 +1,4 @@
-[![WordPress tested 5.5](https://img.shields.io/badge/WordPress-v5.5%20tested-0073aa.svg)](https://wordpress.org/plugins/plugin_slug) [![PHPCS WPCS](https://img.shields.io/badge/PHPCS-WordPress%20Coding%20Standards-8892BF.svg)](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) [![PHPUnit ](.github/coverage.svg)](https://brianhenryie.github.io/plugin_slug/)
+[![WordPress tested 5.5](https://img.shields.io/badge/WordPress-v5.5%20tested-0073aa.svg)](https://wordpress.org/plugins/bh-wc-rest-change-units) [![PHPCS WPCS](https://img.shields.io/badge/PHPCS-WordPress%20Coding%20Standards-8892BF.svg)](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) [![PHPUnit ](.github/coverage.svg)](https://brianhenryie.github.io/bh-wc-rest-change-units/)
 
 # REST Change Units
 
@@ -75,18 +75,21 @@ This does not make any conversions when data is being _written_ to the REST API.
 
 This is only tested with Simple products (although 'weight' is a field in the base WC_Product, so I expect it should work without issue).
 
+### Gutenberg
+
+Since Gutenberg uses the REST API, this will probably affect weights when displayed in blocks.
 
 ## Contributing
 
 Clone this repo, open PhpStorm, then run `composer install` to install the dependencies.
 
 ```
-git clone https://github.com/brianhenryie/plugin_slug.git;
+git clone https://github.com/brianhenryie/bh-wc-rest-change-units.git;
 open -a PhpStorm ./;
 composer install;
 ```
 
-For integration and acceptance tests, a local webserver must be running with `localhost:8080/plugin_slug/` pointing at the root of the repo. MySQL must also be running locally – with two databases set up with:
+For integration and acceptance tests, a local webserver must be running with `localhost:8080/bh-wc-rest-change-units/` pointing at the root of the repo. MySQL must also be running locally – with two databases set up with:
 
 ```
 mysql_username="root"
