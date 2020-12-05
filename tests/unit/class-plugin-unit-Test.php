@@ -15,14 +15,33 @@ use BH_WC_REST_Change_Units\includes\BH_WC_REST_Change_Units;
  */
 class Plugin_Unit_Test extends \Codeception\Test\Unit {
 
+	/**
+	 * @var callable An autoloader to prevent BH_WC_REST_Change_Units class being loaded.
+	 */
+	protected $autoloader;
+
 	protected function _before() {
 		\WP_Mock::setUp();
+
+		$this->autoloader = function ( $classname ) {
+			$autoload_classmap = array(
+				'BH_WC_REST_Change_Units\\includes\\BH_WC_REST_Change_Units'     => __DIR__ . "/mock.php",
+			);
+			if ( array_key_exists( $classname, $autoload_classmap ) && file_exists( $autoload_classmap[ $classname ] ) ) {
+				require_once $autoload_classmap[ $classname ];
+			}
+		};
+
+		spl_autoload_register( $this->autoloader );
+
 	}
 
 	/**
 	 * Verifies the plugin initialization.
+	 *
 	 */
 	public function test_plugin_include() {
+
 
 		$plugin_root_dir = dirname( __DIR__, 2 ) . '/src';
 
@@ -84,6 +103,12 @@ class Plugin_Unit_Test extends \Codeception\Test\Unit {
 
 		$this->assertEmpty( $printed_output );
 
+	}
+
+	protected function _tearDown() {
+		parent::_tearDown();
+
+		spl_autoload_unregister( $this->autoloader );
 	}
 
 }
