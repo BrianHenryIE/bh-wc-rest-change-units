@@ -151,30 +151,6 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 		$this->assertEquals( 123, $php_product->get_weight() );
 	}
 
-
-	/**
-	 * @runInSeparateProcess
-	 * @preserveGlobalState disabled
-	 */
-	public function test_wp_json_v3() {
-
-		$rest_server = rest_get_server();
-
-		$request = new WP_REST_Request( 'GET', '/wc/v3/products/' . $this->product->get_id() );
-
-		$response = rest_do_request( $request );
-
-		$rest_product = $rest_server->response_to_data( $response, false );
-
-		$this->assertEquals( 3487, $rest_product['weight'] );
-
-		// Verify that we have not disturbed the internal product weight.
-
-		$php_product = wc_get_product( $this->product->get_id() );
-		$this->assertEquals( 123, $php_product->get_weight() );
-	}
-
-
 	/**
 	 * @runInSeparateProcess
 	 * @preserveGlobalState disabled
@@ -219,5 +195,27 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 		$php_product = wc_get_product( $this->product->get_id() );
 		$this->assertEquals( 123, $php_product->get_weight() );
 	}
+
+
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_wp_json_v3() {
+
+		$rest_server = rest_get_server();
+
+		$request = new WP_REST_Request( 'GET', '/wc/v3/products/' . $this->product->get_id() );
+		$response = rest_do_request( $request );
+		$rest_product = $rest_server->response_to_data( $response, false );
+
+		$this->assertEquals( 3487, $rest_product['weight'] );
+
+		// Verify that we have not disturbed the internal product weight.
+
+		$php_product = wc_get_product( $this->product->get_id() );
+		$this->assertEquals( 123, $php_product->get_weight() );
+	}
+
 
 }
