@@ -221,8 +221,4 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 
 	}
 
-
-
-
-
 }

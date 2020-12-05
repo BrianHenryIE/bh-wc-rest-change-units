@@ -31,6 +31,9 @@ use WP_REST_Response;
 class API_Product {
 
 	/**
+	 * Cache the result of the null checks on the conversion.
+	 * TODO: Add filters before each conversion.
+	 *
 	 * @var null|false|array {'from' string,'to' string}
 	 */
 	protected $should_convert;
@@ -41,10 +44,10 @@ class API_Product {
 	 * @hooked woocommerce_api_product_response
 	 * @see WC_API_Products::get_product()
 	 *
-	 * @param array         $product_data
-	 * @param WC_Product    $product
-	 * @param string        $fields Fields to include in REST response. TODO: test without weight.
-	 * @param WC_API_Server $server
+	 * @param array         $product_data The key value pairs that will be returned by the API.
+	 * @param WC_Product    $product The product being queried.
+	 * @param string        $fields Fields query in the API request `/wc-api/v1/products/9?fields=...`.
+	 * @param WC_API_Server $server The API server instance (could be v1/v2/v3).
 	 *
 	 * @return array
 	 */
@@ -80,8 +83,8 @@ class API_Product {
 	 * @see WC_REST_Products_V2_Controller::prepare_object_for_response()
 	 *
 	 * @param WP_REST_Response $response The response object.
-	 * @param WC_Product $product Object data.
-	 * @param WP_REST_Request $request Request object.
+	 * @param WC_Product       $product Object data.
+	 * @param WP_REST_Request  $request Request object.
 	 *
 	 * @return WP_REST_Response
 	 */
@@ -113,11 +116,11 @@ class API_Product {
 	 * @see https://github.com/PhpUnitsOfMeasure/php-units-of-measure
 	 * @see https://www.nist.gov/pml/weights-and-measures/metric-si/unit-conversion
 	 *
-	 * @param float|int $product_weight
-	 * @param string    $from_unit
-	 * @param string    $to_unit
+	 * @param float|int $product_weight Number to convert.
+	 * @param string    $from_unit  Unit to convert from.
+	 * @param string    $to_unit    Unit to convert to.
 	 *
-	 * @return float|int
+	 * @return float|int Converted number.
 	 */
 	protected function convert( $product_weight, string $from_unit, string $to_unit ) {
 
@@ -151,8 +154,6 @@ class API_Product {
 	 * @return false|array
 	 */
 	protected function should_convert() {
-
-		// TODO: unhook our function so we get the true value.
 
 		$woocommerce_weight_unit = get_option( 'woocommerce_weight_unit' );
 

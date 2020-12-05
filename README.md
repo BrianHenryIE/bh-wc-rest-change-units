@@ -49,7 +49,7 @@ $conditionally_change_rest_weight_unit = function ( $pre_option, $option, $defau
 		return 'lbs';
 	}
 
-	// Do no conversion. TODO: infinite loop here.
+	// Do no conversion. It seem WordPress prevents any worry of an infinite loop here.
 	return get_option( 'woocommerce_weight_unit' );
 
 

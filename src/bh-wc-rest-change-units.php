@@ -55,8 +55,7 @@ function instantiate_bh_wc_rest_change_units() {
 }
 
 /**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and frontend-facing site hooks.
+ * The core plugin class that is used to define internationalization and hooks.
  */
 $GLOBALS['bh_wc_rest_change_units'] = $bh_wc_rest_change_units = instantiate_bh_wc_rest_change_units();
 $bh_wc_rest_change_units->run();
