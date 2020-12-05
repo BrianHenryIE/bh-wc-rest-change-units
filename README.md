@@ -4,7 +4,7 @@
 
 Use different product weight units in the REST API than elsewhere in your WooCommerce store.
 
-Uses [PhpUnitsOfMeasure](https://github.com/PhpUnitsOfMeasure/php-units-of-measure) library for conversions.
+Uses [PhpUnitsOfMeasure](https://github.com/PhpUnitsOfMeasure/php-units-of-measure) library for conversions (which I believe uses [NIST's standards for unit conversions](https://www.nist.gov/pml/weights-and-measures/metric-si/unit-conversion)).
 
 ## Why?
 
@@ -12,11 +12,11 @@ When importing orders to [DHL](https://dhlexpresscommerce.com/), the only config
 
 ## Use
 
-Download latest release, upload to your WordPress/WooCommerce store. Configure:
+[Download the latest release](https://github.com/BrianHenryIE/bh-wc-rest-change-units/releases), upload to your WordPress/WooCommerce store. Configure in the WordPress admin UI under `WooCommerce` / `Settings` / `Products` :
 
 ![REST API weight unit](./assets/screenshot-1.png "REST API weight unit settings screenshot")
 
-Only one option is provided by the plugin, on the WooCommerce settings product page.
+`REST API weight unit` is the only option provided by the plugin.
 
 For more granular control, use the `pre_option_bh_wc_rest_change_units_weight_unit` filter:
 
@@ -26,11 +26,11 @@ For more granular control, use the `pre_option_bh_wc_rest_change_units_weight_un
  * 
  * @see get_option()
  * 
- * @param false|mixed $pre_option Return false to fetch the option value as normal.
- * @param string      $option     The option name: "bh_wc_rest_change_units_weight_unit".
- * @param mixed       $default    The default value as might be specified by get_option() second parameter.
+ * @param false|string|mixed $pre_option Defaults to false to fetch the option value as normal; may be mixed (should be string) if another filter has interjected.   
+ * @param string             $option     The option name: "bh_wc_rest_change_units_weight_unit".
+ * @param string             $default    The default value as might be specified by get_option() second parameter.
  *
- * @return false|mixed|string|void
+ * @return string The unit to be used: g|kg|lbs|oz.
  */
 $conditionally_change_rest_weight_unit = function ( $pre_option, $option, $default ) {
 
@@ -49,23 +49,29 @@ $conditionally_change_rest_weight_unit = function ( $pre_option, $option, $defau
 		return 'lbs';
 	}
 
-	// Do no conversion. It seem WordPress prevents any worry of an infinite loop here.
+	// Do no conversion.
 	return get_option( 'woocommerce_weight_unit' );
 
+    // or
 
-	// Return whatever is configured in WooCommerce settings (i.e. return what is configured on the settings page as normal).
+	// Return return what is configured on the settings page as normal.
 	return $pre_option;
 
 };
 add_filter( 'pre_option_bh_wc_rest_change_units_weight_unit', $conditionally_change_rest_weight_unit, 10, 3 );
 ```
 
+If you want a filter for product-level granular control, open an issue and we can think it through.
 
 ## Notes
 
 ### Internal REST API calls.
 
 It's not unheard of for WordPress plugins to use the REST API internally to query data, so this may result in unexpected behavioiur.
+
+### Gutenberg
+
+Since Gutenberg uses the REST API, this will probably affect weights when displayed in blocks.
 
 ### Create/Update
 
@@ -75,9 +81,9 @@ This does not make any conversions when data is being _written_ to the REST API.
 
 This is only tested with Simple products (although 'weight' is a field in the base WC_Product, so I expect it should work without issue).
 
-### Gutenberg
+## Need More?
 
-Since Gutenberg uses the REST API, this will probably affect weights when displayed in blocks.
+Conversion for dimensions could easily be added. If that's what you're looking for, open an issue and we can figure it out.
 
 ## Contributing
 
@@ -132,9 +138,7 @@ vendor/bin/codecept run acceptance;
 Output and merge code coverage with:
 
 ```
-vendor/bin/codecept run unit --coverage unit.cov;
-vendor/bin/codecept run wpunit --coverage wpunit.cov;
-vendor/bin/phpcov merge --clover tests/_output/clover.xml --html tests/_output/html tests/_output --text;
+composer run-script coverage-tests
 ```
 
 To save changes made to the acceptance database:
@@ -151,6 +155,12 @@ vendor/bin/codecept clean
 ```
 
 To use XDebug inside Postman, append `&XDEBUG_SESSION_START=PHPSTORM` to the query.
+
+To create a .zip ready to upload to WordPress:
+
+```
+composer run-script create-plugin-archive
+```
 
 ### More Information
 
