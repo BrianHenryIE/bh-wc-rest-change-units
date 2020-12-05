@@ -76,7 +76,6 @@ class BH_WC_REST_Change_Units extends WPPB_Plugin_Abstract {
 		$plugin_i18n = new I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -95,7 +94,10 @@ class BH_WC_REST_Change_Units extends WPPB_Plugin_Abstract {
 
 		// Return the corresponding weight unit.
 		$api_server = new API_Server();
-		$this->loader->add_filter( 'pre_option_woocommerce_weight_unit', $api_server, 'display_correct_weight_unit', 10, 3 );
+		// For legacy API.
+		$this->loader->add_filter( 'woocommerce_api_index', $api_server, 'change_product_weight_option_in_legacy_schema', 10, 1 );
+		// For wp-json API.
+		$this->loader->add_filter( 'woocommerce_rest_product_schema', $api_server, 'change_product_weight_option_in_wp_json_schema', 10, 1 );
 
 		// Add configuration option in WooCommerce.
 		$settings = new Settings_Products();

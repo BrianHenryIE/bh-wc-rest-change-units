@@ -68,22 +68,6 @@ class BH_WC_REST_Change_Units_Integration_Test extends \Codeception\TestCase\WPT
 
 
 	/**
-	 * Check the option filter is registered to display the correct weight unit on the REST API.
-	 */
-	public function test_filter_pre_option_woocommerce_weight_unit_display_correct_weight_unit() {
-
-		$action_name       = 'pre_option_woocommerce_weight_unit';
-		$expected_priority = 10;
-
-		$class_type = API_Server::class;
-		$method_name = 'display_correct_weight_unit';
-
-		$function_is_hooked = $this->is_function_hooked_on_action( $class_type, $method_name, $action_name, $expected_priority );
-
-		$this->assertNotFalse( $function_is_hooked );
-	}
-
-	/**
 	 * Hook for v1 wp-json API.
 	 */
 	public function test_filter_pwoocommerce_rest_prepare_product_update_weight_wp_json_api() {
@@ -115,7 +99,37 @@ class BH_WC_REST_Change_Units_Integration_Test extends \Codeception\TestCase\WPT
 		$this->assertNotFalse( $function_is_hooked );
 	}
 
+	/**
+	 * Hook for legacy API schema change
+	 */
+	public function test_filter_change_weight_option_in_legacy_schema() {
 
+		$action_name       = 'woocommerce_rest_product_schema';
+		$expected_priority = 10;
+
+		$class_type = API_Server::class;
+		$method_name = 'change_product_weight_option_in_wp_json_schema';
+
+		$function_is_hooked = $this->is_function_hooked_on_action( $class_type, $method_name, $action_name, $expected_priority );
+
+		$this->assertNotFalse( $function_is_hooked );
+	}
+
+	/**
+	 * Hook for wp-json API schema change
+	 */
+	public function test_filter_change_weight_option_in_wp_json_schema() {
+
+		$action_name       = 'woocommerce_api_index';
+		$expected_priority = 10;
+
+		$class_type = API_Server::class;
+		$method_name = 'change_product_weight_option_in_legacy_schema';
+
+		$function_is_hooked = $this->is_function_hooked_on_action( $class_type, $method_name, $action_name, $expected_priority );
+
+		$this->assertNotFalse( $function_is_hooked );
+	}
 
 
 	protected function is_function_hooked_on_action( $class_type, $method_name, $action_name, $expected_priority = 10 ) {

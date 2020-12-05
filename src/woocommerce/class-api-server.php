@@ -21,29 +21,43 @@ namespace BH_WC_REST_Change_Units\woocommerce;
 class API_Server {
 
 	/**
-	 * Short circuit `get_option( 'woocommerce_weight_unit' )` with the value of the REST weight option.
+	 * Change the product weight unit description as the /wp-json/wc/ REST schema is being built.
 	 *
-	 * @hooked pre_option_woocommerce_weight_unit
-	 * @see get_option()
+	 * @hooked woocommerce_rest_product_schema
 	 *
-	 * @param mixed  $pre_option The value to return instead of the option value. This differs
-	 *                            from `$default`, which is used as the fallback value in the event
-	 *                            the option doesn't exist elsewhere in get_option().
-	 *                            Default false (to skip past the short-circuit).
-	 * @param string $option Option name.
-	 * @param mixed  $default The fallback value to return if the option does not exist.
-	 *                            Default false.
+	 * @see WC_REST_Products_V2_Controller::get_item_schema()
+	 * @see WC_REST_Controller::add_additional_fields_schema()
 	 *
-	 * @return false|mixed|void
+	 * @param array $schema_properties The schema array being returned by the wp-json REST API.
+	 *
+	 * @return array
 	 */
-	public function display_correct_weight_unit( $pre_option, $option, $default ) {
+	public function change_product_weight_option_in_wp_json_schema( $schema_properties ): array {
 
-		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+		$weight_unit = get_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID );
 
-			return get_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID );
-		}
+		/* translators: %s: weight unit */
+		$schema_properties['weight']['description'] = sprintf( __( 'Product weight (%s).', 'bh-wc-rest-change-units' ), $weight_unit );
 
-		return $pre_option;
+		return $schema_properties;
+
 	}
 
+	/**
+	 * Change the product weight unit description as the legacy REST schema is being built.
+	 *
+	 * @hooked woocommerce_api_index
+	 *
+	 * @param array $available The schema array being returned by the legacy REST API.
+	 *
+	 * @return array
+	 */
+	public function change_product_weight_option_in_legacy_schema( $available ): array {
+
+		$weight_unit = get_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID );
+
+		$available['store']['meta']['weight_unit'] = $weight_unit;
+
+		return $available;
+	}
 }
