@@ -1,6 +1,6 @@
 <?php
 /**
- * @package           BH_WC_REST_Change_Units
+ * @package    brianhenryie/bh-wc-rest-change-units
  */
 
 $GLOBALS['project_root_dir']   = $project_root_dir  = dirname( __FILE__, 2 );

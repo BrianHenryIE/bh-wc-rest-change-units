@@ -6,7 +6,7 @@
  * @author  Brian Henry <BrianHenryIE@gmail.com>
  */
 
-namespace BH_WC_REST_Change_Units\woocommerce;
+namespace BrianHenryIE\WC_REST_Change_Units\WooCommerce;
 
 /**
  *

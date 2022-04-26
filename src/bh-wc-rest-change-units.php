@@ -9,7 +9,7 @@
  *
  * @link              https://github.com/BrianHenryIE/bh-wc-rest-change-units
  * @since             1.0.0
- * @package           BH_WC_REST_Change_Units
+ * @package           brianhenryie/bh-wc-rest-change-units
  *
  * @wordpress-plugin
  * Plugin Name:       REST Change Units
@@ -24,10 +24,9 @@
  * Domain Path:       /languages
  */
 
-namespace BH_WC_REST_Change_Units;
+namespace BrianHenryIE\WC_REST_Change_Units;
 
-use BH_WC_REST_Change_Units\includes\BH_WC_REST_Change_Units;
-use BH_WC_REST_Change_Units\BrianHenryIE\WPPB\WPPB_Loader;
+use BrianHenryIE\WC_REST_Change_Units\Includes\BH_WC_REST_Change_Units;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

@@ -6,15 +6,14 @@
  *
  * @link              https://github.com/BrianHenryIE/bh-wc-rest-change-units
  * @since             1.0.0
- * @package           BH_WC_REST_Change_Units
+ * @package    brianhenryie/bh-wc-rest-change-units
  *
  * @see https://github.com/pablo-sg-pacheco/wp-namespace-autoloader/
  */
 
-namespace BH_WC_REST_Change_Units;
+namespace BrianHenryIE\WC_REST_Change_Units;
 
-use BH_WC_REST_Change_Units\Pablo_Pacheco\WP_Namespace_Autoloader\WP_Namespace_Autoloader;
-
+use BrianHenryIE\WC_REST_Change_Units\Pablo_Pacheco\WP_Namespace_Autoloader\WP_Namespace_Autoloader;
 
 $class_map_file = __DIR__ . '/autoload-classmap.php';
 if ( file_exists( $class_map_file ) ) {

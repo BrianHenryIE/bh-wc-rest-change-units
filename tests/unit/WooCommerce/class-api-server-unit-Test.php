@@ -22,7 +22,7 @@ class API_Server_Unit_Test extends \Codeception\Test\Unit {
 			'get_option',
 			array(
 				'args'   => 'bh_wc_rest_change_units_weight_unit',
-				'return' => $weight_unit,
+				'return' => $weight_unit
 			)
 		);
 
@@ -30,8 +30,8 @@ class API_Server_Unit_Test extends \Codeception\Test\Unit {
 
 		$schema_properties = array(
 			'weight' => array(
-				'description' => 'Product weight (real people use SI).',
-			),
+				'description' => 'Product weight (real people use SI).'
+			)
 		);
 
 		$updated_properties = $sut->change_product_weight_option_in_wp_json_schema( $schema_properties );
@@ -49,7 +49,7 @@ class API_Server_Unit_Test extends \Codeception\Test\Unit {
 			'get_option',
 			array(
 				'args'   => 'bh_wc_rest_change_units_weight_unit',
-				'return' => $weight_unit,
+				'return' => $weight_unit
 			)
 		);
 
@@ -58,9 +58,9 @@ class API_Server_Unit_Test extends \Codeception\Test\Unit {
 		$available = array(
 			'store' => array(
 				'meta' => array(
-					'weight_unit' => 'Product weight (real people use SI).',
-				),
-			),
+					'weight_unit' => 'Product weight (real people use SI).'
+				)
+			)
 		);
 
 		$updated_properties = $sut->change_product_weight_option_in_legacy_schema( $available );

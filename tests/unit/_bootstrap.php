@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file for WP_Mock.
  *
- * @package           BH_WC_REST_Change_Units
+ * @package    brianhenryie/bh-wc-rest-change-units
  */
 
 //global $plugin_root_dir;

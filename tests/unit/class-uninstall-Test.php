@@ -8,7 +8,7 @@
 
 namespace BH_WC_REST_Change_Units;
 
-use BH_WC_REST_Change_Units\woocommerce\Settings_Products;
+use BrianHenryIE\WC_REST_Change_Units\WooCommerce\Settings_Products;
 
 /**
  * Class Plugin_WP_Mock_Test

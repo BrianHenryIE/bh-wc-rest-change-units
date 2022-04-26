@@ -12,6 +12,9 @@ namespace BrianHenryIE\WC_REST_Change_Units\WooCommerce;
 
 /**
  * Filter the WooCommerce settings and add the option at the end of the "Measurements" section.
+ *
+ * Class Settings_Products
+ *
  */
 class Settings_Products {
 

@@ -21,7 +21,7 @@
  * @link       https://github.com/BrianHenryIE/bh-wc-rest-change-units
  * @since      1.0.0
  *
- * @package    BH_WC_REST_Change_Units
+ * @package    brianhenryie/bh-wc-rest-change-units
  */
 
 // If uninstall not called from WordPress, then exit.

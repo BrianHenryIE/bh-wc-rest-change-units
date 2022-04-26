@@ -5,13 +5,12 @@
  * @link       https://github.com/BrianHenryIE/bh-wc-rest-change-units
  * @since      1.0.0
  *
- * @package    BH_WC_REST_Change_Units
- * @subpackage BH_WC_REST_Change_Units/woocommerce
+ * @package    brianhenryie/bh-wc-rest-change-units
  */
 
-namespace BH_WC_REST_Change_Units\woocommerce;
+namespace BrianHenryIE\WC_REST_Change_Units\WooCommerce;
 
-use BH_WC_REST_Change_Units\PhpUnitsOfMeasure\PhysicalQuantity\Mass;
+use BrianHenryIE\WC_REST_Change_Units\PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Exception;
 use WC_API_Server;
 use WC_Product;
@@ -23,10 +22,6 @@ use WP_REST_Response;
  * Filters legacy API.
  * Filters wp-json/wc API.
  * Performs conversion using PhpUnitsOfMeasure library and rounds the number.
- *
- * Class API_Product
- *
- * @package BH_WC_REST_Change_Units\woocommerce
  */
 class API_Product {
 

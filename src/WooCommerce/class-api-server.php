@@ -5,18 +5,13 @@
  * @link       https://github.com/BrianHenryIE/bh-wc-rest-change-units
  * @since      1.0.0
  *
- * @package    BH_WC_REST_Change_Units
- * @subpackage BH_WC_REST_Change_Units/woocommerce
+ * @package    brianhenryie/bh-wc-rest-change-units
  */
 
-namespace BH_WC_REST_Change_Units\woocommerce;
+namespace BrianHenryIE\WC_REST_Change_Units\WooCommerce;
 
 /**
  * Filter the wp_option call for the weight unit. Note: this could cause an infinite loop.
- *
- * Class API_Server
- *
- * @package BH_WC_REST_Change_Units\woocommerce
  */
 class API_Server {
 

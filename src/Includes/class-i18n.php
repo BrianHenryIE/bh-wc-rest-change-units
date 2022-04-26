@@ -8,22 +8,17 @@
  * @link       https://github.com/BrianHenryIE/bh-wc-rest-change-units
  * @since      1.0.0
  *
- * @package    BH_WC_REST_Change_Units
- * @subpackage BH_WC_REST_Change_Units/includes
+ * @package    brianhenryie/bh-wc-rest-change-units
+
  */
 
-namespace BH_WC_REST_Change_Units\includes;
+namespace BrianHenryIE\WC_REST_Change_Units\Includes;
 
 /**
  * Define the internationalization functionality.
  *
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
- *
- * @since      1.0.0
- * @package    BH_WC_REST_Change_Units
- * @subpackage BH_WC_REST_Change_Units/includes
- * @author     Brian Henry <BrianHenryIE@gmail.com>
  */
 class I18n {
 

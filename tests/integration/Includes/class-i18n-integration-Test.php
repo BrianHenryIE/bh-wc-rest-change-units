@@ -6,7 +6,7 @@
  * @author  Brian Henry <BrianHenryIE@gmail.com>
  */
 
-namespace BH_WC_REST_Change_Units\includes;
+namespace BrianHenryIE\WC_REST_Change_Units\Includes;
 
 /**
  * Class BH_WC_REST_Change_Units_Test
