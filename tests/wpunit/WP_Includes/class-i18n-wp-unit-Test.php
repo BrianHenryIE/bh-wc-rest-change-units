@@ -9,9 +9,7 @@
 namespace BrianHenryIE\WC_REST_Change_Units\WP_Includes;
 
 /**
- * Class I18n_Test
- *
- * @see I18n
+ * @coversDefaultClass \BrianHenryIE\WC_REST_Change_Units\WP_Includes\I18n
  */
 class I18n_WP_Unit_Test extends \Codeception\TestCase\WPTestCase {
 

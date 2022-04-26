@@ -8,6 +8,9 @@
 
 namespace BrianHenryIE\WC_REST_Change_Units\WooCommerce;
 
+/**
+ * @coversDefaultClass \BrianHenryIE\WC_REST_Change_Units\WooCommerce\API_Server
+ */
 class API_Server_Unit_Test extends \Codeception\Test\Unit {
 
 	protected function _before() {
