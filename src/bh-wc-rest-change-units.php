@@ -47,8 +47,7 @@ define( 'BH_WC_REST_CHANGE_UNITS_VERSION', '1.0.3' );
  */
 function instantiate_bh_wc_rest_change_units() {
 
-	$loader = new WPPB_Loader();
-	$plugin = new BH_WC_REST_Change_Units( $loader );
+	$plugin = new BH_WC_REST_Change_Units();
 
 	return $plugin;
 }
@@ -56,5 +55,4 @@ function instantiate_bh_wc_rest_change_units() {
 /**
  * The core plugin class that is used to define internationalization and hooks.
  */
-$GLOBALS['bh_wc_rest_change_units'] = $bh_wc_rest_change_units = instantiate_bh_wc_rest_change_units();
-$bh_wc_rest_change_units->run();
+$GLOBALS['bh_wc_rest_change_units'] = instantiate_bh_wc_rest_change_units();

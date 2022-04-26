@@ -26,7 +26,7 @@ use BrianHenryIE\WC_REST_Change_Units\WooCommerce\Settings_Products;
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  */
-class BH_WC_REST_Change_Units extends WPPB_Plugin_Abstract {
+class BH_WC_REST_Change_Units {
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -36,22 +36,13 @@ class BH_WC_REST_Change_Units extends WPPB_Plugin_Abstract {
 	 * the frontend-facing side of the site.
 	 *
 	 * @since    1.0.0
-	 *
-	 * @param WPPB_Loader_Interface $loader The WPPB class which adds the hooks and filters to WordPress.
 	 */
-	public function __construct( $loader ) {
-		if ( defined( 'BH_WC_REST_CHANGE_UNITS_VERSION' ) ) {
-			$version = BH_WC_REST_CHANGE_UNITS_VERSION;
-		} else {
-			$version = '1.0.3';
-		}
-		$plugin_name = 'bh-wc-rest-change-units';
-
-		parent::__construct( $loader, $plugin_name, $version );
+	public function __construct() {
 
 		$this->set_locale();
 
-		$this->define_woocommerce_hooks();
+		$this->define_rest_hooks();
+		$this->define_ui_hooks();
 	}
 
 	/**
@@ -67,33 +58,36 @@ class BH_WC_REST_Change_Units extends WPPB_Plugin_Abstract {
 
 		$plugin_i18n = new I18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ) );
 	}
 
 	/**
 	 * Add filters to REST API responses and WooCommerce product settings page.
 	 */
-	protected function define_woocommerce_hooks() {
+	protected function define_rest_hooks() {
 
 		// Convert product weight units.
 		$api_product = new API_Product();
 		// For legacy API.
-		$this->loader->add_filter( 'woocommerce_api_product_response', $api_product, 'update_weight_legacy_api', 10, 4 );
+		add_filter( 'woocommerce_api_product_response', array( $api_product, 'update_weight_legacy_api' ), 10, 4 );
 		// For wp-json/wc/v1.
-		$this->loader->add_filter( 'woocommerce_rest_prepare_product', $api_product, 'update_weight_wp_json_api', 10, 3 );
+		add_filter( 'woocommerce_rest_prepare_product', array( $api_product, 'update_weight_wp_json_api' ), 10, 3 );
 		// For wp-json/wc/v2.
-		$this->loader->add_filter( 'woocommerce_rest_prepare_product_object', $api_product, 'update_weight_wp_json_api', 10, 3 );
+		add_filter( 'woocommerce_rest_prepare_product_object', array( $api_product, 'update_weight_wp_json_api' ), 10, 3 );
 
 		// Return the corresponding weight unit.
 		$api_server = new API_Server();
 		// For legacy API.
-		$this->loader->add_filter( 'woocommerce_api_index', $api_server, 'change_product_weight_option_in_legacy_schema', 10, 1 );
+		add_filter( 'woocommerce_api_index', array( $api_server, 'change_product_weight_option_in_legacy_schema' ), 10, 1 );
 		// For wp-json API.
-		$this->loader->add_filter( 'woocommerce_rest_product_schema', $api_server, 'change_product_weight_option_in_wp_json_schema', 10, 1 );
+		add_filter( 'woocommerce_rest_product_schema', array( $api_server, 'change_product_weight_option_in_wp_json_schema' ), 10, 1 );
+	}
+
+	protected function define_ui_hooks() {
 
 		// Add configuration option in WooCommerce.
 		$settings = new Settings_Products();
-		$this->loader->add_filter( 'woocommerce_products_general_settings', $settings, 'add_rest_weight_unit_setting', 10, 1 );
+		add_filter( 'woocommerce_products_general_settings', array( $settings, 'add_rest_weight_unit_setting' ), 10, 1 );
 
 	}
 
