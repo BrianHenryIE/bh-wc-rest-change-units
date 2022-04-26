@@ -22,7 +22,7 @@ class BH_WC_REST_Change_Units_Integration_Test extends \Codeception\TestCase\WPT
 	 */
 	public function test_action_plugins_loaded_load_plugin_textdomain(): void {
 
-		$action_name       = 'plugins_loaded';
+		$action_name       = 'init';
 		$expected_priority = 10;
 
 		$class_type  = I18n::class;
