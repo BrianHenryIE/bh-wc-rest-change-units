@@ -84,12 +84,18 @@
                 "Add GitHub Actions Annotations report type": "https://github.com/squizlabs/PHP_CodeSniffer/pull/2918.patch"
             }
         },
-        "mozart": {
-            "dep_namespace": "BH_WC_REST_Change_Units\\",
-            "dep_directory": "/src/vendor/",
+        "strauss": {
+            "namespace_prefix": "BrianHenryIE\\WC_REST_Change_Units\\",
+            "target_directory": "/src/strauss/",
             "classmap_prefix": "BH_WC_REST_Change_Units_",
-            "classmap_directory": "/src/dependencies/",
-            "delete_vendor_directories": false
+            "namespace_replacement_patterns": {
+                "~BrianHenryIE\\\\(.*)~" : "BrianHenryIE\\WC_REST_Change_Units\\\\$1"
+            },
+            "exclude_from_copy": {
+                "file_patterns": [
+                    "~psr/log/Psr/Log/Test.*~"
+                ]
+            }
         },
         "symlinks": {
             "wp-content": "wordpress/wp-content",
@@ -112,7 +118,7 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "\"vendor/bin/mozart\" compose",
+            "vendor/bin/strauss",
             "vendor/bin/wp core download --path=wordpress --allow-root || true;",
             "export $(grep -v '^#' .env.testing | xargs); vendor/bin/wp config create --dbname=$TEST_SITE_DB_NAME --dbuser=$TEST_SITE_DB_USER --dbpass=$TEST_SITE_DB_PASSWORD --allow-root || true",
             "Kporras07\\ComposerSymlinks\\ScriptHandler::createSymlinks",
@@ -121,9 +127,9 @@
             "BrianHenryIE\\ComposerPhpStorm\\PHPUnitRunConfigurations::update"
         ],
         "post-update-cmd": [
-            "\"vendor/bin/mozart\" compose",
             "vendor/bin/wp core download --path=wordpress --allow-root || true;",
             "export $(grep -v '^#' .env.testing | xargs); vendor/bin/wp config create --dbname=$TEST_SITE_DB_NAME --dbuser=$TEST_SITE_DB_USER --dbpass=$TEST_SITE_DB_PASSWORD --allow-root || true",
+            "vendor/bin/strauss",
             "Kporras07\\ComposerSymlinks\\ScriptHandler::createSymlinks",
             "mkdir -p wordpress/wp-content/uploads",
             "BrianHenryIE\\ComposerPhpStorm\\ExcludeFolders::update",
