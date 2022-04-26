@@ -15,7 +15,8 @@
  * Plugin Name:       REST Change Units
  * Plugin URI:        http://github.com/BrianHenryIE/bh-wc-rest-change-units/
  * Description:       Converts orders' weight units for compatibility with external services. e.g. oz on the website, g over REST API.
- * Version:           1.0.3
+ * Version:           1.0.5
+ * Requires PHP:      7.4
  * Author:            Brian Henry
  * Author URI:        https://github.com/BrianHenryIE/bh-wc-rest-change-units/
  * License:           GPL-2.0+
@@ -38,7 +39,7 @@ require_once plugin_dir_path( __FILE__ ) . 'autoload.php';
 /**
  * Current plugin version (semver).
  */
-define( 'BH_WC_REST_CHANGE_UNITS_VERSION', '1.0.3' );
+define( 'BH_WC_REST_CHANGE_UNITS_VERSION', '1.0.5' );
 define( 'BH_WC_REST_CHANGE_UNITS_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
