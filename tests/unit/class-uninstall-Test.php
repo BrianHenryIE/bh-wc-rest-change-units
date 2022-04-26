@@ -18,7 +18,7 @@ class Uninstall_Unit_Test extends \Codeception\Test\Unit {
 	/**
 	 * Verify uninstall deletes the option.
 	 */
-	public function test_uninstall_delete() {
+	public function test_uninstall_delete(): void {
 
 		global $plugin_root_dir;
 

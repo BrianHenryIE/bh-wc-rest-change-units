@@ -54,7 +54,7 @@ class BH_WC_REST_Change_Units {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	protected function set_locale() {
+	protected function set_locale(): void {
 
 		$plugin_i18n = new I18n();
 
@@ -64,7 +64,7 @@ class BH_WC_REST_Change_Units {
 	/**
 	 * Add filters to REST API responses and WooCommerce product settings page.
 	 */
-	protected function define_rest_hooks() {
+	protected function define_rest_hooks(): void {
 
 		// Convert product weight units.
 		$api_product = new API_Product();
@@ -83,7 +83,7 @@ class BH_WC_REST_Change_Units {
 		add_filter( 'woocommerce_rest_product_schema', array( $api_server, 'change_product_weight_option_in_wp_json_schema' ), 10, 1 );
 	}
 
-	protected function define_ui_hooks() {
+	protected function define_ui_hooks(): void {
 
 		// Add configuration option in WooCommerce.
 		$settings = new Settings_Products();

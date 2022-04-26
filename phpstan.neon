@@ -17,6 +17,4 @@ parameters:
         - src/strauss
         - wp-content/plugins
         - vendor/wp-cli
-    ignoreErrors:
-        - '#expects callable\(\): mixed, array#'
 

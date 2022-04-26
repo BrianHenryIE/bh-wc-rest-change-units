@@ -20,7 +20,7 @@ class BH_WC_REST_Change_Units_Integration_Test extends \Codeception\TestCase\WPT
 	/**
 	 * Verify action to call load textdomain is added.
 	 */
-	public function test_action_plugins_loaded_load_plugin_textdomain() {
+	public function test_action_plugins_loaded_load_plugin_textdomain(): void {
 
 		$action_name       = 'plugins_loaded';
 		$expected_priority = 10;

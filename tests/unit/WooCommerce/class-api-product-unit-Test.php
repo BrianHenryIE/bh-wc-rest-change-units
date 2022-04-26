@@ -8,6 +8,9 @@
 
 namespace BrianHenryIE\WC_REST_Change_Units\WooCommerce;
 
+use WC_API_Server;
+use WC_Product;
+
 /**
  * @coversDefaultClass \BrianHenryIE\WC_REST_Change_Units\WooCommerce\API_Product
  */
@@ -18,7 +21,10 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 	}
 
 
-	public function test_oz_to_lbs() {
+	public function test_oz_to_lbs(): void {
+
+		$product = $this->makeEmpty( WC_Product::class );
+		$server  = $this->makeEmpty( WC_API_Server::class );
 
 		$from = 'oz';
 		$to   = 'lbs';
@@ -45,14 +51,17 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'weight' => 123,
 		);
 
-		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
+		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, $product, null, $server );
 
 		$this->assertEquals( 7.688, $updated_product_data_array['weight'] );
 
 	}
 
 
-	public function test_lbs_to_oz() {
+	public function test_lbs_to_oz(): void {
+
+		$product = $this->makeEmpty( WC_Product::class );
+		$server  = $this->makeEmpty( WC_API_Server::class );
 
 		$from = 'lbs';
 		$to   = 'oz';
@@ -79,7 +88,7 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'weight' => 123,
 		);
 
-		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
+		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, $product, null, $server );
 
 		$this->assertEquals( 1968, $updated_product_data_array['weight'] );
 
@@ -87,7 +96,10 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 
 
 
-	public function test_oz_to_g() {
+	public function test_oz_to_g(): void {
+
+		$product = $this->makeEmpty( WC_Product::class );
+		$server  = $this->makeEmpty( WC_API_Server::class );
 
 		$from = 'oz';
 		$to   = 'g';
@@ -114,14 +126,17 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'weight' => 123,
 		);
 
-		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
+		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, $product, null, $server );
 
 		$this->assertEquals( 3487, $updated_product_data_array['weight'] );
 
 	}
 
 
-	public function test_lbs_to_g() {
+	public function test_lbs_to_g(): void {
+
+		$product = $this->makeEmpty( WC_Product::class );
+		$server  = $this->makeEmpty( WC_API_Server::class );
 
 		$from = 'lbs';
 		$to   = 'g';
@@ -148,7 +163,7 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'weight' => 123,
 		);
 
-		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
+		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, $product, null, $server );
 
 		$this->assertEquals( 55792, $updated_product_data_array['weight'] );
 
@@ -156,8 +171,10 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 
 
 
+	public function test_g_to_lbs(): void {
 
-	public function test_g_to_lbs() {
+		$product = $this->makeEmpty( WC_Product::class );
+		$server  = $this->makeEmpty( WC_API_Server::class );
 
 		$from = 'g';
 		$to   = 'lbs';
@@ -184,14 +201,17 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'weight' => 123,
 		);
 
-		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
+		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, $product, null, $server );
 
 		$this->assertEquals( 0.271, $updated_product_data_array['weight'] );
 
 	}
 
 
-	public function test_g_to_oz() {
+	public function test_g_to_oz(): void {
+
+		$product = $this->makeEmpty( WC_Product::class );
+		$server  = $this->makeEmpty( WC_API_Server::class );
 
 		$from = 'g';
 		$to   = 'oz';
@@ -218,7 +238,7 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'weight' => 123,
 		);
 
-		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
+		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, $product, null, $server );
 
 		$this->assertEquals( 4.339, $updated_product_data_array['weight'] );
 

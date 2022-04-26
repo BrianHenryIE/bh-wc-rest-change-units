@@ -14,6 +14,7 @@ use BrianHenryIE\WC_REST_Change_Units\PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 use Exception;
 use WC_API_Server;
 use WC_Product;
+use WP_Post;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -29,7 +30,7 @@ class API_Product {
 	 * Cache the result of the null checks on the conversion.
 	 * TODO: Add filters before each conversion.
 	 *
-	 * @var null|false|array {'from' string,'to' string}
+	 * @var array{from:string,to:string}|null|false
 	 */
 	protected $should_convert;
 
@@ -39,14 +40,14 @@ class API_Product {
 	 * @hooked woocommerce_api_product_response
 	 * @see WC_API_Products::get_product()
 	 *
-	 * @param array         $product_data The key value pairs that will be returned by the API.
-	 * @param WC_Product    $product The product being queried.
-	 * @param string        $fields Fields query in the API request `/wc-api/v1/products/9?fields=...`.
-	 * @param WC_API_Server $server The API server instance (could be v1/v2/v3).
+	 * @param array<string,mixed> $product_data The key value pairs that will be returned by the API.
+	 * @param WC_Product          $product The product being queried.
+	 * @param string              $fields Fields query in the API request `/wc-api/v1/products/9?fields=...`.
+	 * @param WC_API_Server       $server The API server instance (could be v1/v2/v3).
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
-	public function update_weight_legacy_api( $product_data, $product, $fields, $server ) {
+	public function update_weight_legacy_api( array $product_data, WC_Product $product, ?string $fields, WC_API_Server $server ) {
 
 		$should_convert = $this->should_convert ?? $this->should_convert();
 		if ( ! is_array( $should_convert ) ) {
@@ -77,13 +78,13 @@ class API_Product {
 	 * @hooked woocommerce_rest_prepare_product_object
 	 * @see WC_REST_Products_V2_Controller::prepare_object_for_response()
 	 *
-	 * @param WP_REST_Response $response The response object.
-	 * @param WC_Product       $product Object data.
-	 * @param WP_REST_Request  $request Request object.
+	 * @param WP_REST_Response   $response  The response object.
+	 * @param WP_Post|WC_Product $product   Post or product object.
+	 * @param WP_REST_Request    $request   Request object.
 	 *
 	 * @return WP_REST_Response
 	 */
-	public function update_weight_wp_json_api( $response, $product, $request ) {
+	public function update_weight_wp_json_api( WP_REST_Response $response, $product, WP_REST_Request $request ): WP_REST_Response {
 
 		if ( ! isset( $response->data['weight'] ) ) {
 			return $response;
@@ -111,16 +112,20 @@ class API_Product {
 	 * @see https://github.com/PhpUnitsOfMeasure/php-units-of-measure
 	 * @see https://www.nist.gov/pml/weights-and-measures/metric-si/unit-conversion
 	 *
-	 * @param float|int $product_weight Number to convert.
-	 * @param string    $from_unit  Unit to convert from.
-	 * @param string    $to_unit    Unit to convert to.
+	 * @param float|int|string $product_weight Number to convert.
+	 * @param string           $from_unit  Unit to convert from.
+	 * @param string           $to_unit    Unit to convert to.
 	 *
-	 * @return float|int Converted number.
+	 * @return float|int|string Converted number.
 	 */
 	protected function convert( $product_weight, string $from_unit, string $to_unit ) {
 
+		if ( floatval( $product_weight ) === 0.0 ) {
+			return $product_weight;
+		}
+
 		try {
-			$weight           = new Mass( $product_weight, $from_unit );
+			$weight           = new Mass( floatval( $product_weight ), $from_unit );
 			$converted_weight = $weight->toUnit( $to_unit );
 		} catch ( Exception $e ) {
 			return $product_weight;
@@ -146,7 +151,7 @@ class API_Product {
 	 *
 	 * Stores the result in $this->should_convert.
 	 *
-	 * @return false|array
+	 * @return false|array{from:string, to:string}
 	 */
 	protected function should_convert() {
 

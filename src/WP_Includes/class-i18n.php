@@ -21,13 +21,12 @@ namespace BrianHenryIE\WC_REST_Change_Units\WP_Includes;
  */
 class I18n {
 
-
 	/**
 	 * Load the plugin text domain for translation.
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_plugin_textdomain() {
+	public function load_plugin_textdomain(): void {
 
 		load_plugin_textdomain(
 			'bh-wc-rest-change-units',
@@ -36,7 +35,5 @@ class I18n {
 		);
 
 	}
-
-
 
 }

@@ -16,7 +16,7 @@ use WP_REST_Request;
  */
 class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 
-	public function test_get_option_normal() {
+	public function test_get_option_normal(): void {
 
 		update_option( 'woocommerce_weight_unit', 'oz' );
 		update_option( 'bh_wc_rest_change_units_weight_unit', 'kg' );
@@ -27,7 +27,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 
 	}
 
-	protected function register_legacy_autoloader( int $version ) {
+	protected function register_legacy_autoloader( int $version ): void {
 		$autoload_classmap = array(
 			'WC_API_Products'     => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/class-wc-api-products.php",
 			'WC_API_Resource'     => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/class-wc-api-resource.php",
@@ -48,7 +48,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 	/**
 	 *
 	 */
-	public function test_legacy_v1_schema() {
+	public function test_legacy_v1_schema(): void {
 
 		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs-v1-legacy' );
 

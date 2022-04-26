@@ -17,7 +17,7 @@ use WP_REST_Response;
  */
 class API_Product_WP_Unit_Test extends \Codeception\TestCase\WPTestCase {
 
-	public function test_happy_path() {
+	public function test_happy_path(): void {
 
 		update_option( 'woocommerce_weight_unit', 'lb' );
 		update_option( 'bh_wc_rest_change_units_weight_unit', 'oz' );

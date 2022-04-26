@@ -17,7 +17,7 @@ class API_Server_Unit_Test extends \Codeception\Test\Unit {
 		\WP_Mock::setUp();
 	}
 
-	public function test_change_weight_option_in_product_schema() {
+	public function test_change_weight_option_in_product_schema(): void {
 
 		$weight_unit = 'oz';
 
@@ -44,7 +44,7 @@ class API_Server_Unit_Test extends \Codeception\Test\Unit {
 	}
 
 
-	public function test_change_weight_option_in_legacy_schema() {
+	public function test_change_weight_option_in_legacy_schema(): void {
 
 		$weight_unit = 'oz';
 

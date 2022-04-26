@@ -23,11 +23,11 @@ class Settings_Products {
 	 * @hooked woocommerce_products_general_settings
 	 * @see WC_Settings_Products::get_settings()
 	 *
-	 * @param array $general_settings The existing general settings from the WooCommerce settings product page.
+	 * @param array<int|string, array<string,int|string|array>> $general_settings The existing general settings from the WooCommerce settings product page.
 	 *
-	 * @return array
+	 * @return array<int|string, array<string,int|string|array>>
 	 */
-	public function add_rest_weight_unit_setting( $general_settings ) {
+	public function add_rest_weight_unit_setting( array $general_settings ): array {
 
 		$rest_weight_unit_setting = array(
 			'title'    => __( 'REST API weight unit', 'bh-wc-rest-change-units' ),
@@ -48,6 +48,7 @@ class Settings_Products {
 
 		$updated_general_settings = array();
 
+		// Place the new setting in the array after the existing units settings.
 		foreach ( $general_settings as $setting ) {
 			$updated_general_settings[] = $setting;
 			if ( 'woocommerce_dimension_unit' === $setting['id'] ) {

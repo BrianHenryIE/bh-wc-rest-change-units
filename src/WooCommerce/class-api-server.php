@@ -23,16 +23,18 @@ class API_Server {
 	 * @see WC_REST_Products_V2_Controller::get_item_schema()
 	 * @see WC_REST_Controller::add_additional_fields_schema()
 	 *
-	 * @param array $schema_properties The schema array being returned by the wp-json REST API.
+	 * @param array<string, array<string|mixed>> $schema_properties The schema array being returned by the wp-json REST API.
 	 *
-	 * @return array
+	 * @return array<string, array<string|mixed>>
 	 */
-	public function change_product_weight_option_in_wp_json_schema( $schema_properties ): array {
+	public function change_product_weight_option_in_wp_json_schema( array $schema_properties ): array {
 
 		$weight_unit = get_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID );
 
-		/* translators: %s: weight unit */
-		$schema_properties['weight']['description'] = sprintf( __( 'Product weight (%s).', 'bh-wc-rest-change-units' ), $weight_unit );
+		if ( in_array( $weight_unit, array( 'kg', 'g', 'lbs', 'oz' ), true ) ) {
+			/* translators: %s: weight unit */
+			$schema_properties['weight']['description'] = sprintf( __( 'Product weight (%s).', 'bh-wc-rest-change-units' ), $weight_unit );
+		}
 
 		return $schema_properties;
 
@@ -43,15 +45,17 @@ class API_Server {
 	 *
 	 * @hooked woocommerce_api_index
 	 *
-	 * @param array $available The schema array being returned by the legacy REST API.
+	 * @param array{store: array<string, mixed>} $available The schema array being returned by the legacy REST API.
 	 *
-	 * @return array
+	 * @return array{store: array<string, mixed>}
 	 */
-	public function change_product_weight_option_in_legacy_schema( $available ): array {
+	public function change_product_weight_option_in_legacy_schema( array $available ): array {
 
 		$weight_unit = get_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID );
 
-		$available['store']['meta']['weight_unit'] = $weight_unit;
+		if ( in_array( $weight_unit, array( 'kg', 'g', 'lbs', 'oz' ), true ) ) {
+			$available['store']['meta']['weight_unit'] = $weight_unit;
+		}
 
 		return $available;
 	}

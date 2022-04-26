@@ -24,10 +24,10 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 		$product->set_weight( 123 );
 		$product->save();
 
-		set_current_user( 1 );
+		wp_set_current_user( 1 );
 	}
 
-	protected function register_legacy_autoloader( int $version ) {
+	protected function register_legacy_autoloader( int $version ): void {
 		$autoload_classmap = array(
 			'WC_API_Products'     => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/class-wc-api-products.php",
 			'WC_API_Resource'     => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/class-wc-api-resource.php",
@@ -49,7 +49,7 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 	 * @runInSeparateProcess
 	 * @preserveGlobalState disabled
 	 */
-	public function test_legacy_v1() {
+	public function test_legacy_v1(): void {
 
 		$this->register_legacy_autoloader( 1 );
 
@@ -83,7 +83,7 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 	 * @runInSeparateProcess
 	 * @preserveGlobalState disabled
 	 */
-	public function test_legacy_v2() {
+	public function test_legacy_v2(): void {
 
 		$this->register_legacy_autoloader( 2 );
 
@@ -119,7 +119,7 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 	 * @runInSeparateProcess
 	 * @preserveGlobalState disabled
 	 */
-	public function test_legacy_v3() {
+	public function test_legacy_v3(): void {
 
 		$this->register_legacy_autoloader( 3 );
 
@@ -152,7 +152,7 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 	 * @runInSeparateProcess
 	 * @preserveGlobalState disabled
 	 */
-	public function test_wp_json_v1() {
+	public function test_wp_json_v1(): void {
 
 		$rest_server = rest_get_server();
 
@@ -175,7 +175,7 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 	 * @runInSeparateProcess
 	 * @preserveGlobalState disabled
 	 */
-	public function test_wp_json_v2() {
+	public function test_wp_json_v2(): void {
 
 		$rest_server = rest_get_server();
 
@@ -198,7 +198,7 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 	 * @runInSeparateProcess
 	 * @preserveGlobalState disabled
 	 */
-	public function test_wp_json_v3() {
+	public function test_wp_json_v3(): void {
 
 		$rest_server = rest_get_server();
 
