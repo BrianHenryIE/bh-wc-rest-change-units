@@ -26,7 +26,7 @@
 
 namespace BrianHenryIE\WC_REST_Change_Units;
 
-use BrianHenryIE\WC_REST_Change_Units\Includes\BH_WC_REST_Change_Units;
+use BrianHenryIE\WC_REST_Change_Units\WP_Includes\BH_WC_REST_Change_Units;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

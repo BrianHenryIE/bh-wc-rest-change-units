@@ -9,10 +9,9 @@
  * @since      1.0.0
  *
  * @package    brianhenryie/bh-wc-rest-change-units
-
  */
 
-namespace BrianHenryIE\WC_REST_Change_Units\Includes;
+namespace BrianHenryIE\WC_REST_Change_Units\WP_Includes;
 
 /**
  * Define the internationalization functionality.

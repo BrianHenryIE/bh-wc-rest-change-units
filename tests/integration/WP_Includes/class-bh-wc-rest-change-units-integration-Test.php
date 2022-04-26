@@ -6,7 +6,7 @@
  * @author  Brian Henry <BrianHenryIE@gmail.com>
  */
 
-namespace BrianHenryIE\WC_REST_Change_Units\Includes;
+namespace BrianHenryIE\WC_REST_Change_Units\WP_Includes;
 
 use BrianHenryIE\WC_REST_Change_Units\WooCommerce\API_Product;
 use BrianHenryIE\WC_REST_Change_Units\WooCommerce\API_Server;
