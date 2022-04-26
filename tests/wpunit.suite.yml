@@ -18,6 +18,6 @@ modules:
             domain: "%TEST_SITE_WP_DOMAIN%"
             adminEmail: "%TEST_SITE_ADMIN_EMAIL%"
             title: "bh-wc-rest-change-units"
-            plugins: [ 'woocommerce/woocommerce.php', 'bh-wc-rest-change-units/bh-wc-rest-change-units.php' ]
-            activatePlugins: [ 'woocommerce/woocommerce.php','bh-wc-rest-change-units/bh-wc-rest-change-units.php' ]
+            plugins: [ 'woocommerce/woocommerce.php' ]
+            activatePlugins: [ 'woocommerce/woocommerce.php' ]
 bootstrap: _bootstrap.php
