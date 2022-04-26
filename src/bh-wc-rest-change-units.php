@@ -30,7 +30,7 @@ use BrianHenryIE\WC_REST_Change_Units\Includes\BH_WC_REST_Change_Units;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-	throw new \Exception('WPINC not defined');
+	throw new \Exception( 'WPINC not defined' );
 }
 
 require_once plugin_dir_path( __FILE__ ) . 'autoload.php';
@@ -39,13 +39,14 @@ require_once plugin_dir_path( __FILE__ ) . 'autoload.php';
  * Current plugin version (semver).
  */
 define( 'BH_WC_REST_CHANGE_UNITS_VERSION', '1.0.3' );
+define( 'BH_WC_REST_CHANGE_UNITS_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * Begins execution of the plugin.
  *
  * @since    1.0.0
  */
-function instantiate_bh_wc_rest_change_units() {
+function instantiate_bh_wc_rest_change_units(): BH_WC_REST_Change_Units {
 
 	$plugin = new BH_WC_REST_Change_Units();
 
