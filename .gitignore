@@ -38,17 +38,24 @@ intermediate
 .idea
 cache
 
-/vendor/
-
-wordpress
-src/vendor/
-src/dependencies/
-wp-content/
-
+node_modules
 scratch
+src/strauss/
+wp-content/
+wordpress
+vendor/*
+
+*.zip
+*.phar
 
 # Generated from GitHub Secrets in the workflows.
 .env.secret
 auth.json
 
-*.zip
+# GitHub Actions
+pcov.sh
+xdebug.sh
+7.4linux.sh
+DOCKER_ENV
+docker_tag
+
