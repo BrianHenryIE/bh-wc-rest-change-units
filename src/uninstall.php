@@ -26,7 +26,7 @@
 
 // If uninstall not called from WordPress, then exit.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit;
+	throw new Exception( 'WP_UNINSTALL_PLUGIN not defined' );
 }
 
 delete_option( 'bh_wc_rest_change_units_weight_unit' );
