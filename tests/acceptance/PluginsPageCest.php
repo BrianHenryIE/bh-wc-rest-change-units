@@ -1,7 +1,7 @@
-<?php 
+<?php
 
-class WooCommerceSettingsProductPageCest
-{
+class WooCommerceSettingsProductPageCest {
+
 
 	/**
 	 * Login and navigate to plugins.php.
@@ -11,7 +11,7 @@ class WooCommerceSettingsProductPageCest
 	public function _before( AcceptanceTester $I ) {
 		$I->loginAsAdmin();
 
-		$I->amOnAdminPage('admin.php?page=wc-settings&tab=products');
+		$I->amOnAdminPage( 'admin.php?page=wc-settings&tab=products' );
 	}
 
 	/**
@@ -32,7 +32,7 @@ class WooCommerceSettingsProductPageCest
 	 */
 	public function testSettingOptionsArePresent( AcceptanceTester $I ) {
 
-		$I->seeNumberOfElements( '#bh_wc_rest_change_units_weight_unit > option',4);
+		$I->seeNumberOfElements( '#bh_wc_rest_change_units_weight_unit > option', 4 );
 
 	}
 

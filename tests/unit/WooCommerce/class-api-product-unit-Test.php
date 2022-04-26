@@ -18,13 +18,13 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 	public function test_oz_to_lbs() {
 
 		$from = 'oz';
-		$to = 'lbs';
+		$to   = 'lbs';
 
 		\WP_Mock::userFunction(
 			'get_option',
 			array(
 				'args'   => 'woocommerce_weight_unit',
-				'return' => $from
+				'return' => $from,
 			)
 		);
 
@@ -32,14 +32,14 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'get_option',
 			array(
 				'args'   => 'bh_wc_rest_change_units_weight_unit',
-				'return' => $to
+				'return' => $to,
 			)
 		);
 
 		$sut = new API_Product();
 
 		$product_data_array = array(
-			'weight' => 123
+			'weight' => 123,
 		);
 
 		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
@@ -52,13 +52,13 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 	public function test_lbs_to_oz() {
 
 		$from = 'lbs';
-		$to = 'oz';
+		$to   = 'oz';
 
 		\WP_Mock::userFunction(
 			'get_option',
 			array(
 				'args'   => 'woocommerce_weight_unit',
-				'return' => $from
+				'return' => $from,
 			)
 		);
 
@@ -66,14 +66,14 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'get_option',
 			array(
 				'args'   => 'bh_wc_rest_change_units_weight_unit',
-				'return' => $to
+				'return' => $to,
 			)
 		);
 
 		$sut = new API_Product();
 
 		$product_data_array = array(
-			'weight' => 123
+			'weight' => 123,
 		);
 
 		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
@@ -87,13 +87,13 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 	public function test_oz_to_g() {
 
 		$from = 'oz';
-		$to = 'g';
+		$to   = 'g';
 
 		\WP_Mock::userFunction(
 			'get_option',
 			array(
 				'args'   => 'woocommerce_weight_unit',
-				'return' => $from
+				'return' => $from,
 			)
 		);
 
@@ -101,14 +101,14 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'get_option',
 			array(
 				'args'   => 'bh_wc_rest_change_units_weight_unit',
-				'return' => $to
+				'return' => $to,
 			)
 		);
 
 		$sut = new API_Product();
 
 		$product_data_array = array(
-			'weight' => 123
+			'weight' => 123,
 		);
 
 		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
@@ -121,13 +121,13 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 	public function test_lbs_to_g() {
 
 		$from = 'lbs';
-		$to = 'g';
+		$to   = 'g';
 
 		\WP_Mock::userFunction(
 			'get_option',
 			array(
 				'args'   => 'woocommerce_weight_unit',
-				'return' => $from
+				'return' => $from,
 			)
 		);
 
@@ -135,14 +135,14 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'get_option',
 			array(
 				'args'   => 'bh_wc_rest_change_units_weight_unit',
-				'return' => $to
+				'return' => $to,
 			)
 		);
 
 		$sut = new API_Product();
 
 		$product_data_array = array(
-			'weight' => 123
+			'weight' => 123,
 		);
 
 		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
@@ -157,13 +157,13 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 	public function test_g_to_lbs() {
 
 		$from = 'g';
-		$to = 'lbs';
+		$to   = 'lbs';
 
 		\WP_Mock::userFunction(
 			'get_option',
 			array(
 				'args'   => 'woocommerce_weight_unit',
-				'return' => $from
+				'return' => $from,
 			)
 		);
 
@@ -171,14 +171,14 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'get_option',
 			array(
 				'args'   => 'bh_wc_rest_change_units_weight_unit',
-				'return' => $to
+				'return' => $to,
 			)
 		);
 
 		$sut = new API_Product();
 
 		$product_data_array = array(
-			'weight' => 123
+			'weight' => 123,
 		);
 
 		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );
@@ -191,13 +191,13 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 	public function test_g_to_oz() {
 
 		$from = 'g';
-		$to = 'oz';
+		$to   = 'oz';
 
 		\WP_Mock::userFunction(
 			'get_option',
 			array(
 				'args'   => 'woocommerce_weight_unit',
-				'return' => $from
+				'return' => $from,
 			)
 		);
 
@@ -205,14 +205,14 @@ class API_Product_Unit_Test extends \Codeception\Test\Unit {
 			'get_option',
 			array(
 				'args'   => 'bh_wc_rest_change_units_weight_unit',
-				'return' => $to
+				'return' => $to,
 			)
 		);
 
 		$sut = new API_Product();
 
 		$product_data_array = array(
-			'weight' => 123
+			'weight' => 123,
 		);
 
 		$updated_product_data_array = $sut->update_weight_legacy_api( $product_data_array, null, null, null );

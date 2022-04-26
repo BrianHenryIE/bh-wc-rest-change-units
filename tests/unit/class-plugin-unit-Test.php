@@ -25,7 +25,7 @@ class Plugin_Unit_Test extends \Codeception\Test\Unit {
 
 		$this->autoloader = function ( $classname ) {
 			$autoload_classmap = array(
-				'BH_WC_REST_Change_Units\\includes\\BH_WC_REST_Change_Units'     => __DIR__ . "/mock.php",
+				'BH_WC_REST_Change_Units\\includes\\BH_WC_REST_Change_Units'     => __DIR__ . '/mock.php',
 			);
 			if ( array_key_exists( $classname, $autoload_classmap ) && file_exists( $autoload_classmap[ $classname ] ) ) {
 				require_once $autoload_classmap[ $classname ];
@@ -38,10 +38,8 @@ class Plugin_Unit_Test extends \Codeception\Test\Unit {
 
 	/**
 	 * Verifies the plugin initialization.
-	 *
 	 */
 	public function test_plugin_include() {
-
 
 		$plugin_root_dir = dirname( __DIR__, 2 ) . '/src';
 

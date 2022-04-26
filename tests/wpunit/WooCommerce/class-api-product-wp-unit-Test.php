@@ -24,19 +24,20 @@ class API_Product_WP_Unit_Test extends \Codeception\TestCase\WPTestCase {
 
 		$api_product = new API_Product();
 
-		$response = $this->make( WP_REST_Response::class,
-			[
+		$response = $this->make(
+			WP_REST_Response::class,
+			array(
 				'data' => array(
-					'weight' => 123
-				)
-			]
+					'weight' => 123,
+				),
+			)
 		);
-		$product = $this->make( WC_Product::class );
-		$request = $this->make( WP_REST_Request::class );
+		$product  = $this->make( WC_Product::class );
+		$request  = $this->make( WP_REST_Request::class );
 
 		$updated_response = $api_product->update_weight_wp_json_api( $response, $product, $request );
 
-		$this->assertEquals( 123*16, $updated_response->data['weight'] );
+		$this->assertEquals( 123 * 16, $updated_response->data['weight'] );
 
 	}
 

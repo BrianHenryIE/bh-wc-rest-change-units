@@ -7,7 +7,7 @@ namespace BrianHenryIE\WC_REST_Change_Units\Includes;
 
 class BH_WC_REST_Change_Units {
 
-	public function __construct( $loader) {}
+	public function __construct( $loader ) {}
 
 	public function run(){}
 }

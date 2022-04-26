@@ -24,16 +24,16 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 		$product->set_weight( 123 );
 		$product->save();
 
-		set_current_user(1);
+		set_current_user( 1 );
 	}
 
 	protected function register_legacy_autoloader( int $version ) {
 		$autoload_classmap = array(
 			'WC_API_Products'     => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/class-wc-api-products.php",
 			'WC_API_Resource'     => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/class-wc-api-resource.php",
-			'WC_API_Server'        => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/class-wc-api-server.php",
+			'WC_API_Server'       => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/class-wc-api-server.php",
 			'WC_API_JSON_Handler' => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/class-wc-api-json-handler.php",
-			'WC_API_Handler' => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/interface-wc-api-handler.php",
+			'WC_API_Handler'      => WP_CONTENT_DIR . "/plugins/woocommerce/includes/legacy/api/v{$version}/interface-wc-api-handler.php",
 		);
 
 		spl_autoload_register(
@@ -51,17 +51,16 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 	 */
 	public function test_legacy_v1() {
 
-		$this->register_legacy_autoloader(1);
+		$this->register_legacy_autoloader( 1 );
 
-
-		$api_route = '/products/' . $this->product->get_id();
+		$api_route                 = '/products/' . $this->product->get_id();
 		$_SERVER['REQUEST_METHOD'] = 'GET';
 
 		$server = new WC_API_Server( $api_route );
 
 		// Check we're running the tests against the correct API version.
-		$reflector = new \ReflectionClass($server );
-		$filename = $reflector->getFileName();
+		$reflector = new \ReflectionClass( $server );
+		$filename  = $reflector->getFileName();
 		assert( false !== stristr( $filename, 'v1' ) );
 
 		// Need to instantiate this so it registers itself as a handler.
@@ -86,18 +85,17 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 	 */
 	public function test_legacy_v2() {
 
-		$this->register_legacy_autoloader(2);
+		$this->register_legacy_autoloader( 2 );
 
-		$api_route = '/products/' . $this->product->get_id();
+		$api_route                 = '/products/' . $this->product->get_id();
 		$_SERVER['REQUEST_METHOD'] = 'GET';
 
 		$server = new WC_API_Server( $api_route );
 
 		// Check we're running the tests against the correct API version.
-		$reflector = new \ReflectionClass($server );
-		$filename = $reflector->getFileName();
+		$reflector = new \ReflectionClass( $server );
+		$filename  = $reflector->getFileName();
 		assert( false !== stristr( $filename, 'v2' ) );
-
 
 		// Need to instantiate this so it registers itself as a handler.
 		$wc_api_products = new WC_API_Products( $server );
@@ -123,17 +121,16 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 	 */
 	public function test_legacy_v3() {
 
-		$this->register_legacy_autoloader(3);
+		$this->register_legacy_autoloader( 3 );
 
-
-		$api_route = '/products/' . $this->product->get_id();
+		$api_route                 = '/products/' . $this->product->get_id();
 		$_SERVER['REQUEST_METHOD'] = 'GET';
 
 		$server = new WC_API_Server( $api_route );
 
 		// Check we're running the tests against the correct API version.
-		$reflector = new \ReflectionClass($server );
-		$filename = $reflector->getFileName();
+		$reflector = new \ReflectionClass( $server );
+		$filename  = $reflector->getFileName();
 		assert( false !== stristr( $filename, 'v3' ) );
 
 		// Need to instantiate this so it registers itself as a handler.
@@ -205,8 +202,8 @@ class REST_Product_Integration_Test extends \Codeception\TestCase\WPRestApiTestC
 
 		$rest_server = rest_get_server();
 
-		$request = new WP_REST_Request( 'GET', '/wc/v3/products/' . $this->product->get_id() );
-		$response = rest_do_request( $request );
+		$request      = new WP_REST_Request( 'GET', '/wc/v3/products/' . $this->product->get_id() );
+		$response     = rest_do_request( $request );
 		$rest_product = $rest_server->response_to_data( $response, false );
 
 		$this->assertEquals( 3487, $rest_product['weight'] );
