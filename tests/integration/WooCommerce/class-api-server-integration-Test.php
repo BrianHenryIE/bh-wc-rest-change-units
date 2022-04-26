@@ -12,7 +12,7 @@ use WC_API_Server;
 use WP_REST_Request;
 
 /**
- *
+ * @coversNothing
  */
 class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 
@@ -46,11 +46,12 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
 	 */
 	public function test_legacy_v1_schema(): void {
 
-		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs-v1-legacy' );
+		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs' );
 
 		$this->register_legacy_autoloader( 1 );
 
@@ -66,7 +67,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 
 		$response = $server->dispatch();
 
-		$this->assertEquals( 'lbs-v1-legacy', $response['store']['meta']['weight_unit'] );
+		$this->assertEquals( 'lbs', $response['store']['meta']['weight_unit'] );
 	}
 
 
@@ -76,7 +77,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 	 */
 	public function test_legacy_v2_schema(): void {
 
-		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs-v2-legacy' );
+		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs' );
 
 		$this->register_legacy_autoloader( 2 );
 
@@ -92,7 +93,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 
 		$response = $server->dispatch();
 
-		$this->assertEquals( 'lbs-v2-legacy', $response['store']['meta']['weight_unit'] );
+		$this->assertEquals( 'lbs', $response['store']['meta']['weight_unit'] );
 	}
 
 
@@ -103,7 +104,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 	 */
 	public function test_legacy_v3_schema(): void {
 
-		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs-v3-legacy' );
+		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs' );
 
 		$this->register_legacy_autoloader( 3 );
 
@@ -119,7 +120,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 
 		$response = $server->dispatch();
 
-		$this->assertEquals( 'lbs-v3-legacy', $response['store']['meta']['weight_unit'] );
+		$this->assertEquals( 'lbs', $response['store']['meta']['weight_unit'] );
 	}
 
 
@@ -134,7 +135,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 	 */
 	public function test_wp_json_v1_schema(): void {
 
-		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs-v1' );
+		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs' );
 
 		$rest_server = rest_get_server();
 
@@ -142,7 +143,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 		$response     = rest_do_request( $request );
 		$http_options = $rest_server->response_to_data( $response, false );
 
-		$this->assertEquals( 'Product weight (lbs-v1).', $http_options['routes']['/wc/v1/products']['endpoints'][1]['args']['weight']['description'] );
+		$this->assertEquals( 'Product weight (lbs).', $http_options['routes']['/wc/v1/products']['endpoints'][1]['args']['weight']['description'] );
 
 	}
 
@@ -157,7 +158,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 	 */
 	public function test_wp_json_v2_schema(): void {
 
-		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs-v2' );
+		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs' );
 
 		$rest_server = rest_get_server();
 
@@ -165,7 +166,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 		$response     = rest_do_request( $request );
 		$http_options = $rest_server->response_to_data( $response, false );
 
-		$this->assertEquals( 'Product weight (lbs-v2).', $http_options['routes']['/wc/v2/products']['endpoints'][1]['args']['weight']['description'] );
+		$this->assertEquals( 'Product weight (lbs).', $http_options['routes']['/wc/v2/products']['endpoints'][1]['args']['weight']['description'] );
 
 	}
 
@@ -180,7 +181,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 	 */
 	public function test_wp_json_v3_schema(): void {
 
-		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs-v3' );
+		update_option( Settings_Products::REST_WEIGHT_UNIT_OPTION_ID, 'lbs' );
 
 		$rest_server = rest_get_server();
 
@@ -188,7 +189,7 @@ class API_Server_Integration_Test extends \Codeception\TestCase\WPTestCase {
 		$response     = rest_do_request( $request );
 		$http_options = $rest_server->response_to_data( $response, false );
 
-		$this->assertEquals( 'Product weight (lbs-v3).', $http_options['routes']['/wc/v3/products']['endpoints'][1]['args']['weight']['description'] );
+		$this->assertEquals( 'Product weight (lbs).', $http_options['routes']['/wc/v3/products']['endpoints'][1]['args']['weight']['description'] );
 
 	}
 
