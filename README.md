@@ -1,4 +1,4 @@
-[![WordPress tested 5.5](https://img.shields.io/badge/WordPress-v5.5%20tested-0073aa.svg)](https://wordpress.org/plugins/bh-wc-rest-change-units) [![PHPCS WPCS](https://img.shields.io/badge/PHPCS-WordPress%20Coding%20Standards-8892BF.svg)](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) [![PHPUnit ](.github/coverage.svg)](https://brianhenryie.github.io/bh-wc-rest-change-units/)
+[![WordPress tested 5.9](https://img.shields.io/badge/WordPress-v5.9%20tested-0073aa.svg)](https://wordpress.org/plugins/bh-wc-rest-change-units) [![PHPCS WPCS](https://img.shields.io/badge/PHPCS-WordPress%20Coding%20Standards-8892BF.svg)](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) [![PHPStan ](https://img.shields.io/badge/PHPStan-Level%208-2a5ea7.svg)](https://github.com/szepeviktor/phpstan-wordpress) [![PHPUnit ](.github/coverage.svg)](https://brianhenryie.github.io/bh-wc-rest-change-units/)
 
 # REST Change Units
 
@@ -67,7 +67,7 @@ If you want a filter for product-level granular control, open an issue and we ca
 
 ### Internal REST API calls.
 
-It's not unheard of for WordPress plugins to use the REST API internally to query data, so this may result in unexpected behavioiur.
+It's not unheard of for WordPress plugins to use the REST API internally to query data, so this may result in unexpected behaviour.
 
 ### Gutenberg
 

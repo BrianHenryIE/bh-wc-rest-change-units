@@ -72,7 +72,6 @@
         "wp-cli/wp-cli-bundle": "*",
         "wp-coding-standards/wpcs": "*  ",
         "wpackagist-plugin/woocommerce": "*",
-        "wpackagist-plugin/wp-mail-logging": "^1.10",
         "wpackagist-theme/storefront": "*",
         "wpackagist-theme/twentytwenty": "*"
     },
